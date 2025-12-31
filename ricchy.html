@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fortune Poultry</title>
+
+<style>
+/* ===== GENERAL STYLES ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, orange, yellow);
+}
+
+h1, h2, h3 {
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 18px;
+    background: #e65100;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #bf360c;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #ff9800;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    padding: 25px;
+    text-align: center;
+}
+
+/* ===== ACCOUNT ===== */
+.account input {
+    padding: 10px;
+    width: 260px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* ===== PRODUCTS ===== */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.product img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== RULES ===== */
+.rules ul {
+    max-width: 700px;
+    margin: auto;
+    text-align: left;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #ff9800;
+    color: white;
+    text-align: center;
+    padding: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐔 Fortune Poultry</h1>
+    <p>Located in Kajiado – Githuguta</p>
+    <p>
+        📞 <a href="tel:0711784026">0711784026</a> |
+        💬 <a href="https://wa.me/254711784026" target="_blank">WhatsApp Us</a>
+    </p>
+</header>
+
+<!-- ===== ACCOUNT CREATION ===== -->
+<div class="section account">
+    <h2>Create Customer Account</h2>
+    <input type="text" id="name" placeholder="Full Name"><br>
+    <input type="tel" id="phone" placeholder="Phone Number"><br>
+    <button onclick="createAccount()">Create Account</button>
+    <p id="accountMsg"></p>
+</div>
+
+<!-- ===== PRODUCTS ===== -->
+<div class="section">
+    <h2>Available Chickens</h2>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24" alt="Broiler Chicken">
+            <h3>Broiler Chicken</h3>
+            <p><strong>KES 480 @</strong></p>
+            <button onclick="order('Broiler Chicken', 480)">Order Now</button>
+        </div>
+
+        <div class="product">
+            <img src="moody-portrait-photo-striking-clean-600nw-2631568707.jpg" alt="Kienyeji Chicken">
+            <h3>Broiler Kenchick at maturity</h3>
+            <p><strong>KES 600</strong></p>
+            <button onclick="order('Kienyeji Chicken', 600)">Order Now</button>
+        </div>
+
+        <div class="product">
+            <img src="20330858-brown-chicken-in-grass.jpg" alt="Layers Chicken">
+            <h3>Layers Chicken</h3>
+            <p><strong>KES 850</strong></p>
+            <button onclick="order('Layers Chicken', 850)">Order Now</button>
+        </div>
+
+        <div class="product">
+            <img src="rooster-Rhode-Island-Red-roosters-chicken-domestication.jpg" alt="Layers Chicken">
+            <h3>Layers Chicken</h3>
+            <p><strong>KES 1500</strong></p>
+            <button onclick="order('Layers Chicken', 850)">Order Now</button>
+        </div>
+       <div class="product">
+            <img src="fresh-raw-chicken.jpg" alt="Layers Chicken">
+            <h3>Broiler chicken slaughtered</h3>
+            <p><strong>KES 480</strong></p>
+            <button onclick="order('Layers Chicken', 850)">Order Now</button>
+        </div>
+        
+        <div class="product">
+            <img src="white-free-range-hen-in-a-grass-field.jpg" alt="Layers Chicken">
+            <h3>Layers Chicken</h3>
+            <p><strong>KES 850</strong></p>
+            <button onclick="order('Layers Chicken', 850)">Order Now</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== RULES ===== -->
+<div class="section rules">
+    <h2>Customer Rules</h2>
+    <ul>
+        <li>Account creation is required before placing orders.</li>
+        <li>Orders must be confirmed via phone or WhatsApp.</li>
+        <li>Payment is required before delivery.</li>
+        <li>Delivery charges depend on your location.</li>
+        <li>No cancellations after confirmation.</li>
+        <li>Inspection allowed before pickup.</li>
+    </ul>
+</div>
+
+<footer>
+    <p>© 2025 Fortune Poultry | Fresh & Healthy Chickens</p>
+</footer>
+
+<script>
+/* ===== JAVASCRIPT ===== */
+let accountCreated = false;
+let customerName = "";
+let customerPhone = "";
+
+function createAccount() {
+    customerName = document.getElementById("name").value;
+    customerPhone = document.getElementById("phone").value;
+
+    if (customerName === "" || customerPhone === "") {
+        document.getElementById("accountMsg").innerText =
+            "Please fill in all details.";
+        return;
+    }
+
+    accountCreated = true;
+    document.getElementById("accountMsg").innerText =
+        "Account created successfully. You can now place orders.";
+}
+
+function order(product, price) {
+    if (!accountCreated) {
+        alert("Please create an account first.");
+        return;
+    }
+
+    let message =
+        "Hello Fortune Poultry,%0A" +
+        "Name: " + customerName + "%0A" +
+        "Phone: " + customerPhone + "%0A" +
+        "Order: " + product + "%0A" +
+        "Price: KES " + price;
+
+    window.open(
+        "https://wa.me/254711784026?text=" + message,
+        "_blank"
+    );
+}
+</script>
+
+</body>
+</html>
